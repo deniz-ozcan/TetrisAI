@@ -2,7 +2,7 @@ from pygame import Surface, draw, font, display, event, Rect, init, QUIT, KEYDOW
 from numpy import sort, array, zeros, uint8, amax, amin, random, rot90, copy
 from time import time
 from random import gauss as gs
-
+from os.path import join,dirname
 
 class Species():
 
@@ -22,7 +22,7 @@ class Species():
     #     self.wRoughness = round(random.random() - 0.5,4)
 
     def initialSpecies(self, gen, count):
-        with open("datas.csv", encoding='utf-8') as f_normal:
+        with open(join(dirname(__file__),"./datas.csv"), encoding='utf-8') as f_normal:
             datas = []
             for line in f_normal:
                 datas.append(line.strip().split(','))
@@ -174,7 +174,7 @@ class Grid():
 
     def apply(self, posX, posY, idt):self.grid[posX, posY] = idt
 
-    def rmCompRows(self):#remove completed rows -> tamamlanan satırları sil
+    def rmCompRows(self):#remove completed rows
         rows = 0
         for y in range(19, -1, -1):
             while amin(self.grid.T[y]) != 0:
